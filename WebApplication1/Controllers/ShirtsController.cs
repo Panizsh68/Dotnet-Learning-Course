@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
@@ -13,15 +14,20 @@ namespace WebApplication1.Controllers
     }
 
     [HttpGet("{id}")]
-    public string GetShirtById(int id)
+    // for FromRoute: 
+    // [HttpGet("{id}/{color}")]
+    public string GetShirtById(int id, [FromHeader(Name = "Color")] string color) // so in header, key is "Color"
+    // public string GetShirtById(int id, [FromQuery] string color) so in query, you will do this: ?color=red in the url
+    // public string GetShirtById(int id, [FromRoute] string color) this will ensure color is taken from the route
     {
-      return $"Reading shirt with id: {id}";
+      return $"Reading shirt with id: {id} and color: {color}";
     }
 
     [HttpPost]
-    public string CreateShirt()
+    public string CreateShirt([FromForm]Shirt shirt)
+    // public string CreateShirt([FromBody]Shirt shirt)
     {
-      return "Creating a new shirt";
+      return $"Creating a new shirt";
     }
 
     [HttpPut("{id}")]
