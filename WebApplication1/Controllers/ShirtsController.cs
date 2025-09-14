@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using WebApplication1.Filters;
 using WebApplication1.Models;
 using WebApplication1.Models.Repositories;
 
@@ -16,15 +17,16 @@ namespace WebApplication1.Controllers
 
     [HttpGet("{id}")]
     // public Shirt GetShirtById(int id) : this means you want to return only Shirt
+    [Shirt_ValidateShirtByIdFilter]
     public IActionResult GetShirtById(int id) // here means you want to return different types of responses
     {
       // return shirts.First(x => x.ShirtId == id); : if not found, it will throw an unfriendly exception
-      if (id <= 0)
-        return BadRequest();
-      var shirt = ShirtRepository.GetShirtById(id);
-      if (shirt == null)
-        return NotFound();
-      return Ok(shirt);
+      // if (id <= 0)
+      //   return BadRequest();
+      // var shirt = ShirtRepository.GetShirtById(id);
+      // if (shirt == null)
+      //   return NotFound();
+      return Ok(ShirtRepository.GetShirtById(id));
     }
 
     [HttpPost]
