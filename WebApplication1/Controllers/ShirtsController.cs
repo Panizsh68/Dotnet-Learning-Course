@@ -23,15 +23,11 @@ namespace WebApplication1.Controllers
     }
 
     [HttpPost]
-    public IActionResult CreateShirt([FromBody]Shirt shirt)
+    [Shirt_ValidateCreateShirtFilter]
+    public IActionResult CreateShirt([FromBody] Shirt shirt)
     {
-      if (shirt == null) return BadRequest();
-
-      var existingShirt = ShirtRepository.GetShirtByProperties(shirt.Brand, shirt.Color, shirt.Gender, shirt.Size);
-      if (existingShirt != null) return BadRequest();
-
       ShirtRepository.AddShirt(shirt);
-      return CreatedAtAction(nameof(GetShirtById), new { id = shirt.ShirtId}, shirt);
+      return CreatedAtAction(nameof(GetShirtById), new { id = shirt.ShirtId }, shirt);
     }
 
     [HttpPut("{id}")]
