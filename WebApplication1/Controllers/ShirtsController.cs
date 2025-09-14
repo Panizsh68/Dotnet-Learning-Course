@@ -12,26 +12,18 @@ namespace WebApplication1.Controllers
     [HttpGet]
     public IActionResult GetShirts()
     {
-      return Ok("Reading all the shirts");
+      return Ok(ShirtRepository.GetShirts());
     }
 
     [HttpGet("{id}")]
-    // public Shirt GetShirtById(int id) : this means you want to return only Shirt
     [Shirt_ValidateShirtByIdFilter]
-    public IActionResult GetShirtById(int id) // here means you want to return different types of responses
+    public IActionResult GetShirtById(int id) 
     {
-      // return shirts.First(x => x.ShirtId == id); : if not found, it will throw an unfriendly exception
-      // if (id <= 0)
-      //   return BadRequest();
-      // var shirt = ShirtRepository.GetShirtById(id);
-      // if (shirt == null)
-      //   return NotFound();
       return Ok(ShirtRepository.GetShirtById(id));
     }
 
     [HttpPost]
     public IActionResult CreateShirt([FromBody]Shirt shirt)
-    // public string CreateShirt([FromForm]Shirt shirt)
     {
       return Ok($"Creating a new shirt");
     }
