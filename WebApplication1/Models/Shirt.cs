@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using WebApplication1.Models.Validations;
 
 namespace WebApplication1.Models
 {
@@ -22,6 +23,7 @@ namespace WebApplication1.Models
         // Nullable int (int?) → optional field.
         // If client does not send Size, it will be null.
         // No validation here, so it's not required in the request body.
+        [Shirt_EnsureCorrectSizing]
         public int? Size { get; set; }
 
         // Nullable string + [Required] → same pattern:
