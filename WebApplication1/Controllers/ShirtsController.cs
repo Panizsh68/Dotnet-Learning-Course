@@ -24,8 +24,8 @@ namespace WebApplication1.Controllers
     }
 
     [HttpPost]
-    public string CreateShirt([FromForm]Shirt shirt)
-    // public string CreateShirt([FromBody]Shirt shirt)
+    public string CreateShirt([FromBody]Shirt shirt)
+    // public string CreateShirt([FromForm]Shirt shirt)
     {
       return $"Creating a new shirt";
     }
