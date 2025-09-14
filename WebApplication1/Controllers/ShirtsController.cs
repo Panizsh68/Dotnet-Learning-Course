@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Models;
+using WebApplication1.Models.Repositories;
 
 namespace WebApplication1.Controllers
 {
@@ -7,14 +8,6 @@ namespace WebApplication1.Controllers
   [Route("api/[controller]")]
   public class ShirtsController : ControllerBase
   {
-    private List<Shirt> shirts = new List<Shirt>()
-    {
-      new Shirt {ShirtId = 1, Brand = "My Brand", Color = "Blue", Gender = "Male", Price = 30, Size = 10},
-      new Shirt {ShirtId = 2, Brand = "My Brand", Color = "Black", Gender = "Male", Price = 35, Size = 12},
-      new Shirt {ShirtId = 3, Brand = "Your Brand", Color = "Pink", Gender = "Female", Price = 28, Size = 8},
-      new Shirt {ShirtId = 4, Brand = "Your Brand", Color = "Yellow",  Gender = "Female", Price = 30, Size = 9},
-    };
-
     [HttpGet]
     public IActionResult GetShirts()
     {
@@ -28,7 +21,7 @@ namespace WebApplication1.Controllers
       // return shirts.First(x => x.ShirtId == id); : if not found, it will throw an unfriendly exception
       if (id <= 0)
         return BadRequest();
-      var shirt = shirts.FirstOrDefault(x => x.ShirtId == id);
+      var shirt = ShirtRepository.GetShirtById(id);
       if (shirt == null)
         return NotFound();
       return Ok(shirt);
