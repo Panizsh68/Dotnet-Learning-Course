@@ -41,9 +41,12 @@ namespace WebApplication1.Controllers
     }
 
     [HttpDelete("{id}")]
+    [Shirt_ValidateShirtByIdFilter]
     public IActionResult DeleteShirt(int id)
     {
-      return Ok($"Deleting shirt with id: {id}");
+      var shirt = ShirtRepository.GetShirtById(id);
+      ShirtRepository.DeleteShirt(id);
+      return Ok(shirt);
     }
   }
 }

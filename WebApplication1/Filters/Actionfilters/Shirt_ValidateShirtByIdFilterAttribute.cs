@@ -25,7 +25,7 @@ namespace WebApplication1.Filters
         }
         else if (!ShirtRepository.ShirtExists(shirtId.Value))
         {
-          context.ModelState.AddModelError("ShirtId", "Shirt doesn't exist");
+          context.ModelState.AddModelError("ShirtId", "Shirt doesn't exist anymore");
           var problemDetails = new ValidationProblemDetails(context.ModelState)
           {
             Status = StatusCodes.Status404NotFound
