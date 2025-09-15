@@ -33,19 +33,10 @@ namespace WebApplication1.Controllers
     [HttpPut("{id}")]
     [Shirt_ValidateShirtByIdFilter]
     [Shirt_ValidateUpdateShirtFilter]
+    [Shirt_HandleUpdateExceptionsFilter]
     public IActionResult UpdateShirt(int id, Shirt shirt)
     {
-      try
-      {
-        ShirtRepository.UpdateShirt(shirt);
-      }
-      catch
-      {
-        if (!ShirtRepository.ShirtExists(id))
-          return NotFound();
-
-        throw;
-      }
+      ShirtRepository.UpdateShirt(shirt);
       return NoContent();
     }
 
